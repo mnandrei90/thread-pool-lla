@@ -4,7 +4,7 @@
 #include "threadpool.h"
 
 void* thread_function(void* threadpool) {
-    threadpool_t* pool = (threadpool_t*)threadpool;
+    threadpool_t* const pool = threadpool;
 
     while (1) {
         pthread_mutex_lock(&(pool->lock));
@@ -18,7 +18,7 @@ void* thread_function(void* threadpool) {
             pthread_exit(NULL);
         }
 
-        task_t task = pool->task_queue[pool->queue_front];
+        const task_t task = pool->task_queue[pool->queue_front];
         pool->queue_front = (pool->queue_front + 1) % QUEUE_SIZE;
         pool->queued--;
 
@@ -60,7 +60,7 @@ void threadpool_destroy(threadpool_t *pool) {
 void threadpool_add_task(threadpool_t *pool, void (*function)(void *), void *arg) {
     pthread_mutex_lock(&(pool->lock));
 
-    int next_rear = (pool->queue_back + 1) % QUEUE_SIZE;
+    const int next_rear = (pool->queue_back + 1) % QUEUE_SIZE;
     if (pool->queued < QUEUE_SIZE) {
         pool->task_queue[pool->queue_back].fn = function;
         pool->task_queue[pool->queue_back].arg = arg;

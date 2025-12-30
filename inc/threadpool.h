@@ -26,6 +26,5 @@ typedef struct {
 void threadpool_init(threadpool_t* pool);
 void threadpool_destroy(threadpool_t* pool);
 void threadpool_add_task(threadpool_t* pool, void (*function)(void*), void* arg);
-void example_task(void* arg);
 
 #endif // THREADPOOL_H 

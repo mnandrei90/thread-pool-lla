@@ -1,10 +1,11 @@
 TARGET = bin/threadpool
+CFLAGS = -std=c17 -Wall -Wextra -pedantic -g -Iinc
 
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
 
 run: clean default
-	./$(TARGET)
+	# ./$(TARGET)
 
 default: $(TARGET)
 
@@ -13,8 +14,8 @@ clean:
 	rm -f bin/*
 
 $(TARGET): $(OBJ)
-	gcc -o $@ $?
+	gcc -o $@ $? $(CFLAGS)
 
 $(OBJ): obj/%.o: src/%.c
-	gcc -c $< -o $@ -Iinc
+	gcc -c $< -o $@ $(CFLAGS)
 
