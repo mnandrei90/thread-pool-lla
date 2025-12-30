@@ -2,6 +2,10 @@
 #define THREADPOOL_H
 
 #include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 
 #define THREADS 16
 #define QUEUE_SIZE 100
