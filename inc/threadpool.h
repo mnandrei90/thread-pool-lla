@@ -17,8 +17,8 @@ typedef struct {
     pthread_t threads[THREADS];
     task_t task_queue[QUEUE_SIZE];
     int queued;
-    int queued_front;
-    int queued_back;
+    int queue_front;
+    int queue_back;
     int stop;
 } threadpool_t;
 
